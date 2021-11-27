@@ -6,11 +6,12 @@ using System.Collections.Generic;
   static void Main(string[] args) {
 
     string entrada;
-      List<string> resultado = new List<string> { };
 
-      int contador = 0;
+    List<string> resultado = new List<string> { };
 
-      while ((entrada = Console.ReadLine()) != "") {
+    int contador = 0;
+
+    while (!string.IsNullOrWhiteSpace(entrada = Console.ReadLine())) {
 
         char[] caracteresArray = entrada.ToCharArray();
 
@@ -22,11 +23,11 @@ using System.Collections.Generic;
           if (caracteresArray[i] != ' ') {
             if (flag) {
 
-              processamento += Char.ToUpper(caracteresArray[i]);
+              processamento += char.ToUpper(caracteresArray[i]);
             }
 
             else {
-              processamento += Char.ToLower(caracteresArray[i]);
+              processamento += char.ToLower(caracteresArray[i]);
             }
 
             flag = !flag;

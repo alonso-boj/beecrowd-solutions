@@ -33,7 +33,6 @@ namespace Ordenação_por_tamanho {
         processamento.Remove(processamento.Length - 1, 1);
 
         saida.Append(processamento + "\n");
-
       }
 
       Console.Write(saida);
