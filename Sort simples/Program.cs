@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 class URI
 {
-
   static void Main(string[] args)
   {
 
@@ -21,6 +20,7 @@ class URI
     listaNumeros.Add(terceiroNumero);
 
     listaNumeros.Sort();
+
     foreach (var numero in listaNumeros)
     {
       Console.WriteLine(numero);
