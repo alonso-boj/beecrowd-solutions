@@ -1,42 +1,44 @@
-﻿// https://www.beecrowd.com.br/judge/pt/problems/view/1259
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Pares_e_ímpares {
-  internal class Program {
+namespace Beecrowd
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      var numberOfEntries = uint.Parse(Console.ReadLine());
 
-    static void Main(string[] args) {
+      var entries = new List<uint>();
 
-      long quantidadeDeEntradas = long.Parse(Console.ReadLine());
+      for (int i = 0; i < numberOfEntries; i++)
+      {
+        var entry = uint.Parse(Console.ReadLine());
 
-      List<int> listaDePares = new List<int>();
-      List<int> listaDeImpares = new List<int>();
-
-      for (int i = 0; i < quantidadeDeEntradas; i++) {
-
-        int entrada = int.Parse(Console.ReadLine());
-
-        if (entrada % 2 == 0) {
-          listaDePares.Add(entrada);
-        }
-        else {
-          listaDeImpares.Add(entrada);
-        }
+        entries.Add(entry);
       }
 
-      listaDePares.Sort();
-      listaDeImpares.Sort();
-      listaDeImpares.Reverse();
+      var evenList = new List<uint>();
 
-      for (int i = 0; i < listaDePares.Count; i++) {
-
-        Console.WriteLine(listaDePares[i]);
+      foreach (var entry in entries.Where(entry => entry % 2 == 0))
+      {
+        evenList.Add(entry);
       }
 
-      for (int i = 0; i < listaDeImpares.Count; i++) {
+      evenList.Sort();
+      evenList.ForEach(number => Console.WriteLine(number));
 
-        Console.WriteLine(listaDeImpares[i]);
+      var unevenList = new List<uint>();
+
+      foreach (var entry in entries.Where(entry => entry % 2 != 0))
+      {
+        unevenList.Add(entry);
       }
+
+      unevenList.Sort();
+      unevenList.Reverse();
+      unevenList.ForEach(number => Console.WriteLine(number));
 
       Console.ReadLine();
     }

@@ -1,56 +1,41 @@
 ﻿// https://www.beecrowd.com.br/judge/pt/problems/view/1234
 using System;
-using System.Collections.Generic;
+using System.Text;
 
-  class URI {
-  static void Main(string[] args) {
+class URI
+{
+  static void Main(string[] args)
+  {
+    string entry;
 
-    string entrada;
+    var result = new StringBuilder();
 
-    List<string> resultado = new List<string> { };
+    while (!string.IsNullOrWhiteSpace(entry = Console.ReadLine()))
+    {
+      bool setToUpper = false;
 
-    int contador = 0;
-
-    while (!string.IsNullOrWhiteSpace(entrada = Console.ReadLine())) {
-
-        char[] caracteresArray = entrada.ToCharArray();
-
-        bool flag = true;
-        string processamento = "";
-
-        for (int i = 0; i < caracteresArray.Length; i++) {
-
-          if (caracteresArray[i] != ' ') {
-            if (flag) {
-
-              processamento += char.ToUpper(caracteresArray[i]);
-            }
-
-            else {
-              processamento += char.ToLower(caracteresArray[i]);
-            }
-
-            flag = !flag;
-          }
-
-          else {
-            processamento += " ";
-          }
+      for (int i = 0; i < entry.Length; i++)
+      {
+        if (entry[i] == ' ')
+        {
+          result.Append(' ');
+          continue;
         }
 
-        resultado.Insert(contador, processamento);
-        contador++;
+        if (setToUpper == false)
+        {
+          result.Append(char.ToUpper(entry[i]));
+          setToUpper = true;
+          continue;
+        }
 
+        result.Append(char.ToLower(entry[i]));
+        setToUpper = false;
       }
 
-      for (int i = 0; i < contador; i++) {
-
-        Console.Write(resultado[i]);
-        Console.WriteLine();
-
-      }
-      Console.ReadLine();
-
+      result.Append(Environment.NewLine);
     }
 
+    Console.Write(result.ToString());
   }
+}

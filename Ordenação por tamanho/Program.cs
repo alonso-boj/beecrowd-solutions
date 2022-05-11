@@ -1,41 +1,43 @@
-﻿// https://www.beecrowd.com.br/judge/pt/problems/view/1244
-
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Ordenação_por_tamanho {
-  internal class Program {
-    static void Main(string[] args) {
+namespace Beecrowd
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      var result = new StringBuilder();
 
-      string entrada;
+      var caseTestsNumber = int.Parse(Console.ReadLine());
 
-      StringBuilder saida = new StringBuilder();
+      var entry = new List<string>();
 
-      int repeticoes = int.Parse(Console.ReadLine());
+      for (int i = 0; i < caseTestsNumber; i++)
+      {
+        var entryList = Console.ReadLine().Split(' ');
 
-      for (int i = 0; i < repeticoes; i++) {
+        entry.Clear();
 
-        entrada = Console.ReadLine();
+        entry.AddRange(entryList);
 
-        string[] arrayDePalavras = entrada.Trim().Split();
+        if (entry.Count > 50) continue;
 
-        var ordenacao = from palavra in arrayDePalavras orderby palavra.Length descending select palavra;
-
-        StringBuilder processamento = new StringBuilder();
-        processamento.Clear();
-
-        foreach (string palavra in ordenacao) {
-
-          processamento.Append(palavra + " ");
+        foreach (var word in entry.OrderByDescending(l => l.Length))
+        {
+          if (word.Count() > 50) continue;
+          result.Append(word + ' ');
         }
 
-        processamento.Remove(processamento.Length - 1, 1);
+        result.Remove(result.Length - 1, 1);
 
-        saida.Append(processamento + "\n");
+        result.AppendLine();
       }
 
-      Console.Write(saida);
+      Console.Write(result);
+
       Console.ReadLine();
     }
   }

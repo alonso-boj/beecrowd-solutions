@@ -1,57 +1,50 @@
-﻿//https://www.beecrowd.com.br/judge/pt/problems/view/1251
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-namespace _1251 {
-  class Program {
-    static void Main(string[] args) {
 
-      string entrada = null;
-      var entradas = new List<string>();
+namespace ConsoleApp2
+{
+  internal class Program
+  {
+    static void Main(string[] args)
+    {
+      string entry;
 
-      while (!string.IsNullOrEmpty(entrada = Console.ReadLine())) {
+      var result = new StringBuilder();
 
-        if (entrada.Length >= 1001)
-          continue;
+      while (!string.IsNullOrEmpty(entry = Console.ReadLine()))
+      {
+        if (entry.Length > 1000) continue;
 
-        entradas.Add(entrada);
+        var dictionary = new Dictionary<char, int>();
+
+        for (int i = 0; i < entry.Length; i++)
+        {
+          if (entry[i] <= 31 || entry[i] >= 128) continue;
+
+          if (dictionary.ContainsKey(entry[i]))
+          {
+            dictionary[entry[i]]++;
+            continue;
+          }
+
+          dictionary.Add(entry[i], 1);
+        }
+
+        foreach (var line in dictionary.OrderBy(v => v.Value).ThenByDescending(v => v.Key))
+        {
+          result.AppendLine($"{(int)line.Key} {line.Value}");
+        }
+
+        result.AppendLine();
       }
 
-      bool line = false;
+      result.Remove(result.Length - 1, 1);
 
-      foreach (var input in entradas) {
+      Console.Write(result);
 
-        if (line)
-
-        Console.Write(Environment.NewLine);
-        var formatted = input.Trim().Replace("\n", "").Replace("\r", "");
-        StringBuilder saida = new StringBuilder();
-        List<char> listaDeCaracteres = new List<char>();
-        listaDeCaracteres.AddRange(formatted);
-        Dictionary<char, int> dicionarioDePalavras = new Dictionary<char, int>();
-
-        foreach (char caractere in listaDeCaracteres) {
-
-          var charInt = (int)caractere;
-
-          if (charInt <= 31 || charInt >= 128) continue;
-          if (dicionarioDePalavras.ContainsKey(caractere)) {
-            dicionarioDePalavras[caractere]++;
-          }
-          else {
-            dicionarioDePalavras.Add(caractere, 1);
-          }
-        }
-        foreach (KeyValuePair<char, int> caractere in dicionarioDePalavras.OrderBy(d => d.Value).ThenByDescending(d => d.Key)) {
-          saida.AppendLine($"{(int)caractere.Key} {caractere.Value}");
-        }
-        Console.Write(saida);
-
-        line = true;
-
-        Console.ReadLine();
-      }
+      Console.ReadLine();
     }
   }
 }

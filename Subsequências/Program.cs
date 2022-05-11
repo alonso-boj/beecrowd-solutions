@@ -1,52 +1,58 @@
-﻿// https://www.beecrowd.com.br/judge/pt/problems/view/1507
-
-using System;
+﻿using System;
 using System.Text;
 
-namespace Subsequências {
-  internal class Program {
-    public static bool verificacao(string principal, string substring) {
+namespace Beecrowd
+{
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      var result = new StringBuilder();
 
-      int caracteresCorrespondentes = 0;
-      int indice = 0;
+      var caseTestsNumber = uint.Parse(Console.ReadLine());
 
-      foreach (char caractere in principal) {
-        if (caractere == substring[indice]) {
-          caracteresCorrespondentes++;
-          indice++;
+      for (int i = 0; i < caseTestsNumber; i++)
+      {
+        var entry = Console.ReadLine();
 
-          if (caracteresCorrespondentes == substring.Length) {
-            return true;
-          }
+        if (entry.Length < 0 || entry.Length > 100000) continue;
+
+        var queryNumber = uint.Parse(Console.ReadLine());
+
+        if (queryNumber < 0 || queryNumber > 1000) continue;
+
+        for (int j = 0; j < queryNumber; j++)
+        {
+          var query = Console.ReadLine();
+
+          if (Verify(entry, query)) result.AppendLine("Yes");
+
+          else result.AppendLine("No");
         }
       }
-      return false;
-    }
-    static void Main(string[] args) {
 
-      StringBuilder saida = new StringBuilder();
+      Console.Write(result);
 
-      int quantidadeDeTestes = int.Parse(Console.ReadLine());
-
-      for (int i = 0; i < quantidadeDeTestes; i++) {
-
-        string stringPrincipal = Console.ReadLine();
-        int quantidadeDeQueries = int.Parse(Console.ReadLine());
-
-        for (int j = 0; j < quantidadeDeQueries; j++) {
-
-          string substring = Console.ReadLine();
-
-          if (verificacao(stringPrincipal, substring)) {
-            saida.AppendLine("Yes");
-          }
-          else {
-            saida.AppendLine("No");
-          }
-        }
-      }
-      Console.Write(saida);
       Console.ReadLine();
+    }
+
+    public static bool Verify(string entry, string substring)
+    {
+      int matchingCharacters = 0;
+      int index = 0;
+
+      foreach (var character in entry)
+      {
+        if (character == substring[index])
+        {
+          matchingCharacters++;
+          index++;
+        }
+
+        if (matchingCharacters == substring.Length) return true;
+      }
+
+      return false;
     }
   }
 }
